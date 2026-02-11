@@ -1,1 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="admin.js" defer></script>
+  <script src="script.js" defer></script>
+</head>
 
+<body>
+
+  <header class="topbar">
+    <div class="logo">BLK Admin</div>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="admin.html" class="active">Admin</a>
+    </nav>
+  </header>
+
+  <main id="admin-content" class="admin-locked">
+    <div class="admin-login-box">
+      <h2>Admin Login</h2>
+      <input type="password" id="admin-password" placeholder="Password" />
+      <p id="admin-error" class="error"></p>
+      <button id="admin-login-btn">Login</button>
+    </div>
+  </main>
+
+</body>
+</html>
