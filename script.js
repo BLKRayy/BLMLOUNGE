@@ -14,9 +14,8 @@ function getParams() {
 }
 
 function clearLockdownParams() {
-  const url = new URL(window.location.href);
-  ["lockdown", "end", "msg"].forEach(k => url.searchParams.delete(k));
-  window.history.replaceState({}, "", url.toString());
+  const clean = window.location.origin + window.location.pathname;
+  window.location.replace(clean);
 }
 
 // ---- Lockdown elements (may be null on some pages) ----
@@ -33,6 +32,7 @@ const errorEl = document.getElementById("lockdown-admin-error");
 
 let interval = null;
 
+// ---- Timer formatting ----
 function fmt(ms) {
   if (ms <= 0) return "00:00:00";
   const s = Math.floor(ms / 1000);
@@ -42,8 +42,10 @@ function fmt(ms) {
   return `${h}:${m}:${sec}`;
 }
 
+// ---- Show lockdown ----
 function showLock(msg, end) {
-  if (!overlay || !msgEl || !timerEl) return;
+  if (!overlay) return;
+
   msgEl.textContent = msg || "This site is locked.";
   overlay.classList.remove("lockdown-hidden");
   document.body.style.overflow = "hidden";
@@ -57,7 +59,6 @@ function showLock(msg, end) {
       if (left <= 0) {
         timerEl.textContent = "00:00:00";
         clearLockdownParams();
-        hideLock();
         return;
       }
       timerEl.textContent = fmt(left);
@@ -69,6 +70,7 @@ function showLock(msg, end) {
   }
 }
 
+// ---- Hide lockdown ----
 function hideLock() {
   if (!overlay) return;
   overlay.classList.add("lockdown-hidden");
@@ -76,42 +78,46 @@ function hideLock() {
   if (interval) clearInterval(interval);
 }
 
-// ---- Wire up lockdown admin popup only if elements exist ----
-if (adminBtn && popup && passInput && cancelBtn && submitBtn && errorEl) {
+// ---- Admin unlock popup ----
+if (adminBtn) {
   adminBtn.addEventListener("click", () => {
     errorEl.textContent = "";
     passInput.value = "";
     popup.classList.remove("lockdown-popup-hidden");
     passInput.focus();
   });
+}
 
+if (cancelBtn) {
   cancelBtn.addEventListener("click", () => {
     popup.classList.add("lockdown-popup-hidden");
   });
+}
 
+if (submitBtn) {
   submitBtn.addEventListener("click", () => {
     if (passInput.value.trim() === ADMIN_PASSWORD) {
       clearLockdownParams();
-      hideLock();
-      popup.classList.add("lockdown-popup-hidden");
     } else {
       errorEl.textContent = "Incorrect password.";
     }
   });
-
-  passInput.addEventListener("keydown", e => {
-    if (e.key === "Enter") submitBtn.click();
-  });
 }
 
-// ---- Init lockdown from URL ----
+// ---- INIT ----
 (function () {
   const p = getParams();
+
+  // If no lockdown param → ALWAYS show normal homepage
+  if (!p.lockdown) {
+    hideLock();
+    return;
+  }
+
+  // If lockdown=1 → activate lockdown
   if (p.lockdown === "1") {
     const msg = p.msg || "This site is locked.";
     const end = p.end ? parseInt(p.end, 10) : null;
     showLock(msg, end);
-  } else {
-    hideLock();
   }
 })();
