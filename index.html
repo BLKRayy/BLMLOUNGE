@@ -1,1 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>BLK Launcher</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
+</head>
 
+<body>
+
+  <!-- HEADER -->
+  <header class="topbar">
+    <div class="logo">BLK Launcher</div>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="games.html">Games</a>
+      <a href="favorites.html">Favorites</a>
+      <a href="admin.html" class="admin-btn">ADMIN</a>
+    </nav>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="home-container">
+    <h1>Welcome to BLK Launcher</h1>
+    <p>Your personal game hub.</p>
+
+    <section class="featured">
+      <h2>Featured Game</h2>
+      <div class="featured-card">
+        <h3>Example Game</h3>
+        <p>A sample featured game card.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- LOCKDOWN OVERLAY -->
+  <div id="lockdown-overlay" class="lockdown-hidden">
+    <div class="lockdown-box">
+      <h2 id="lockdown-message">This site is locked.</h2>
+      <div id="lockdown-timer">--:--:--</div>
+      <button id="lockdown-admin-button">ADMIN</button>
+    </div>
+  </div>
+
+  <!-- LOCKDOWN ADMIN POPUP -->
+  <div id="lockdown-admin-popup" class="lockdown-popup-hidden">
+    <div class="popup-box">
+      <h3>Admin Login</h3>
+      <p>Enter admin password to disable lockdown.</p>
+      <input type="password" id="lockdown-admin-password" placeholder="Password" />
+      <p id="lockdown-admin-error" class="error"></p>
+      <div class="popup-actions">
+        <button id="lockdown-admin-cancel">Cancel</button>
+        <button id="lockdown-admin-submit">Unlock</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
