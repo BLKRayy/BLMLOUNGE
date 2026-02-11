@@ -9,7 +9,6 @@
 </head>
 
 <body>
-
   <header class="topbar">
     <div class="logo">BLK Admin</div>
     <nav class="nav">
@@ -27,5 +26,26 @@
     </div>
   </main>
 
+  <!-- LOCKDOWN OVERLAY (same as index, for safety if URL has lockdown params) -->
+  <div id="lockdown-overlay" class="lockdown-hidden">
+    <div class="lockdown-box">
+      <h2 id="lockdown-message">This site is locked.</h2>
+      <div id="lockdown-timer">--:--:--</div>
+      <button id="lockdown-admin-button">ADMIN</button>
+    </div>
+  </div>
+
+  <div id="lockdown-admin-popup" class="lockdown-popup-hidden">
+    <div class="popup-box">
+      <h3>Admin Login</h3>
+      <p>Enter admin password to disable lockdown.</p>
+      <input type="password" id="lockdown-admin-password" placeholder="Password" />
+      <p id="lockdown-admin-error" class="error"></p>
+      <div class="popup-actions">
+        <button id="lockdown-admin-cancel">Cancel</button>
+        <button id="lockdown-admin-submit">Unlock</button>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
