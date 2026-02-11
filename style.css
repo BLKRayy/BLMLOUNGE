@@ -1,1 +1,59 @@
+body {
+  margin: 0;
+  background: #111;
+  color: white;
+  font-family: Arial;
+}
 
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+  background: #000;
+  border-bottom: 2px solid red;
+}
+
+.nav a {
+  margin-left: 20px;
+  color: red;
+  text-decoration: none;
+}
+
+.admin-btn {
+  color: #ff4444;
+  font-weight: bold;
+}
+
+.home-container {
+  padding: 40px;
+}
+
+.featured-card {
+  background: #222;
+  padding: 20px;
+  border: 1px solid red;
+}
+
+#lockdown-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.lockdown-hidden {
+  display: none;
+}
+
+.popup-box {
+  background: #222;
+  padding: 20px;
+  border: 2px solid red;
+}
+
+.error {
+  color: red;
+  font-size: 12px;
+}
